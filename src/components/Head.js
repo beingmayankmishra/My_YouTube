@@ -3,13 +3,23 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { SiYoutube } from "react-icons/si";
 import { FaUserCircle } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { toggleMenu } from "../utils/appSlice";
 
 const Head = () => {
+const dispatch =useDispatch();
+
+const toggleMenuHandler = ()=>{
+     dispatch(toggleMenu())
+};
+
+
+
   return (
     <div className="flex  justify-between items-center border-b px-4 py-3">
       {/* Left Section */}
       <div className="flex items-center space-x-1">
-        <GiHamburgerMenu className="text-xl cursor-pointer mr-10" />
+        <GiHamburgerMenu onClick={()=>toggleMenuHandler()} className="text-xl cursor-pointer mr-10" />
         <SiYoutube className="text-4xl text-red-600" />
         <b className="cursor-pointer  text-lg">MyYouTube</b>
       </div>
