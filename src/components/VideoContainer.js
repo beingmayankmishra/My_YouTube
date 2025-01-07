@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { YOUTUBE_VIDEO_API } from "../constants";
 import VideoCard from "./VideoCard";
+import { Link } from "react-router-dom";
 
 const VideoContainer = () => {
   const [videos, setVideos] = useState([]);
@@ -24,7 +25,7 @@ const VideoContainer = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {videos.length > 0 ? (
         videos.map((video, index) => (
-          <VideoCard key={index} info={video} />
+       <Link to={"/watch?v=" + video.id}>  <VideoCard key={index} info={video} /> </Link> 
         ))
       ) : (
         <p>Loading videos...</p>

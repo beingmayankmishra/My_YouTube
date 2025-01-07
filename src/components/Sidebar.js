@@ -8,25 +8,31 @@ import {
   MdOutlineWatchLater,
 } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const isMenuOpen = useSelector((state) => state.app.isMenuOpen); // Accessing state correctly
 
+  // Array of buttons with icons, names, and routes
   const btns = [
-    { icon: <AiFillHome />, name: "Home" },
-    { icon: <MdSubscriptions />, name: "Subscriptions" },
-    { icon: <MdVideoLibrary />, name: "Library" },
-    { icon: <MdHistory />, name: "History" },
-    { icon: <RiVideoFill />, name: "Your Videos" },
-    { icon: <MdOutlineWatchLater />, name: "Watch Later" },
-    { icon: <AiFillLike />, name: "Liked Videos" },
+    { icon: <AiFillHome />, name: "Home", to: "/" },
+    { icon: <MdSubscriptions />, name: "Subscriptions", to: "/subscriptions" },
+    { icon: <MdVideoLibrary />, name: "Library", to: "/library" },
+    { icon: <MdHistory />, name: "History", to: "/history" },
+    { icon: <RiVideoFill />, name: "Your Videos", to: "/your-videos" },
+    { icon: <MdOutlineWatchLater />, name: "Watch Later", to: "/watch-later" },
+    { icon: <AiFillLike />, name: "Liked Videos", to: "/liked-videos" },
   ];
 
-  const SideBtn = ({ icon, btnName }) => {
+  // Individual sidebar button component
+  const SideBtn = ({ icon, btnName, to }) => {
     return (
-      <button className="flex items-center p-2 px-5 w-full my-2 justify-start hover:bg-gray-200 rounded-lg">
+      <Link
+        to={to} // Route for navigation
+        className="flex items-center p-2 px-5 w-full my-2 justify-start hover:bg-gray-200 rounded-lg"
+      >
         <span className="mr-2">{icon}</span> {btnName}
-      </button>
+      </Link>
     );
   };
 
@@ -35,7 +41,7 @@ const SideBar = () => {
   return (
     <div className="w-52 mx-1 font-bold hidden md:block">
       {btns.map((btn, i) => (
-        <SideBtn key={i} icon={btn.icon} btnName={btn.name} />
+        <SideBtn key={i} icon={btn.icon} btnName={btn.name} to={btn.to} />
       ))}
     </div>
   );
