@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { YOUTUBE_VIDEO_DETAILS_API, YOUTUBE_CHANNEL_DETAILS_API } from "../constants";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
+import moment from "moment"; 
+import { kFormatter } from "../utils/constants"; 
+import { YOUTUBE_VIDEO_DETAILS_API, YOUTUBE_CHANNEL_DETAILS_API } from "../constants";
+import { AiFillLike } from "react-icons/ai"; 
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -45,17 +48,17 @@ const WatchPage = () => {
   }
 
   const { snippet, statistics } = videoData;
-  const { title, channelTitle } = snippet;
+  const { title, channelTitle, publishedAt } = snippet;
   const { viewCount, likeCount } = statistics;
   const channelLogo = channelData?.snippet?.thumbnails?.default?.url;
   const subscriberCount = channelData?.statistics?.subscriberCount;
 
   return (
-    <div className="flex flex-col px-5">
+    <div className="flex flex-col px-5 ">
       {/* Video Player */}
-      <div className="flex justify-center">
+      <div className="flex justify-center py-5">
         <iframe
-          className="w-[1100px] h-[600px] rounded-lg"
+          className="w-[1100px] h-[600px] rounded-lg shadow-md"
           src={`https://www.youtube.com/embed/${videoId}`}
           title={title}
           frameBorder="0"
@@ -67,7 +70,10 @@ const WatchPage = () => {
       {/* Video Details */}
       <div className="mt-5 max-w-[1100px] mx-auto flex flex-col space-y-4">
         <h1 className="text-2xl font-bold">{title}</h1>
-        <div className="flex items-center justify-between">
+
+        {/* Channel and Like/Dislike Section */}
+        <div className="flex items-center justify-between border-b border-gray-300 pb-4">
+          {/* Left: Channel Info */}
           <div className="flex items-center space-x-4">
             <img
               src={channelLogo}
@@ -77,34 +83,43 @@ const WatchPage = () => {
             <div>
               <h2 className="font-semibold">{channelTitle}</h2>
               <p className="text-sm text-gray-600">
-                {viewCount} views • {subscriberCount} subscribers
+                {kFormatter(subscriberCount)} subscribers
               </p>
             </div>
+            <button className="px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600">
+              Subscribe
+            </button>
           </div>
-          <button className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800">
-            Subscribe
-          </button>
+
+          {/* Right: Like/Dislike Section */}
+          <div className="flex items-center space-x-4 bg-gray-200 px-4 py-2 rounded-lg">
+            <button className="flex items-center space-x-2 text-gray-700 hover:text-black">
+              <AiFillLike size={20} />
+              <span className="font-semibold">{kFormatter(likeCount)}</span>
+              <span>Likes</span>
+            </button>
+            <button className="flex items-center space-x-2 text-gray-700 hover:text-black">
+              <AiFillLike size={20} className="rotate-180" />
+              <span>Dislike</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Views and Published Date */}
+        <div className="flex items-center text-gray-600 text-sm mt-4">
+          <p>{kFormatter(viewCount)} views</p>
+          <span className="mx-2">•</span>
+          <p>{moment(publishedAt).fromNow()}</p>
         </div>
 
         {/* Interaction Buttons */}
-        <div className="flex items-center justify-between mt-4 border-t border-gray-300 pt-4">
-          <div className="flex items-center space-x-4">
-            <button className="flex items-center space-x-2">
-              <span className="text-gray-700 font-semibold">{likeCount}</span>
-              <span className="text-gray-500">Like</span>
-            </button>
-            <button className="flex items-center space-x-2">
-              <span className="text-gray-700 font-semibold">Dislike</span>
-            </button>
-          </div>
-          <div className="flex items-center space-x-4">
-            <button className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
-              Share
-            </button>
-            <button className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
-              Save
-            </button>
-          </div>
+        <div className="flex items-center space-x-4 mt-4">
+          <button className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+            Share
+          </button>
+          <button className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+            Save
+          </button>
         </div>
       </div>
     </div>
