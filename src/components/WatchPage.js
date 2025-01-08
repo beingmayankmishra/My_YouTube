@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -6,6 +7,7 @@ import moment from "moment";
 import { YOUTUBE_VIDEO_DETAILS_API, GOOGLE_API_KEY, kFormatter } from "../constants";
 import { AiFillLike, AiFillDislike, AiOutlineDownload } from "react-icons/ai";
 import { RiShareForwardLine } from "react-icons/ri";
+import Comments from "./Comments"; 
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -116,6 +118,9 @@ const WatchPage = () => {
           <p>{moment(publishedAt).fromNow()}</p>
         </div>
       </div>
+
+      {/* Comments Section */}
+      <Comments videoId={videoId} />
     </div>
   );
 };
