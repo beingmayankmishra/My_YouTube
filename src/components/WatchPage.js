@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,7 +6,7 @@ import moment from "moment";
 import { YOUTUBE_VIDEO_DETAILS_API, GOOGLE_API_KEY, kFormatter } from "../constants";
 import { AiFillLike, AiFillDislike, AiOutlineDownload } from "react-icons/ai";
 import { RiShareForwardLine } from "react-icons/ri";
-import Comments from "./Comments"; 
+import Comments from "../components/Comments"; // Import Comments Component
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -90,8 +89,10 @@ const WatchPage = () => {
               Subscribe
             </button>
           </div>
-          <div className="flex items-center justify-end space-x-4">
-            <div className="flex items-center space-x-2 mr-6">
+
+          {/* Buttons in one row */}
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
               <button className="flex items-center space-x-2 text-gray-700 hover:text-black">
                 <AiFillLike size={20} />
                 <span className="font-semibold">{kFormatter(likeCount || 0)}</span>
@@ -112,6 +113,8 @@ const WatchPage = () => {
             </div>
           </div>
         </div>
+
+        {/* Video stats */}
         <div className="flex items-center text-gray-600 text-sm mt-4">
           <p>{kFormatter(viewCount || 0)} views</p>
           <span className="mx-2">•</span>

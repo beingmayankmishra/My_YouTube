@@ -1,6 +1,6 @@
-
 import React, { useEffect, useState } from "react";
 import { GOOGLE_API_KEY } from "../constants";
+import { AiFillLike } from "react-icons/ai"; // Import AiFillLike for the like icon
 
 const Comments = ({ videoId }) => {
   const [comments, setComments] = useState([]);
@@ -35,26 +35,37 @@ const Comments = ({ videoId }) => {
   }
 
   return (
-    <div className="comments-section mt-5">
-      <h2 className="text-xl font-bold mb-4">Comments</h2>
-      <div className="space-y-4">
+    <div className="comments-section mt-10">
+      <h2 className="text-2xl font-bold mb-6">Comments</h2>
+      <div className="space-y-6">
         {comments.map((comment, index) => {
-          const { authorDisplayName, textDisplay, publishedAt } =
+          const { authorDisplayName, textDisplay, publishedAt, authorProfileImageUrl } =
             comment.snippet.topLevelComment.snippet;
+
           return (
-            <div key={index} className="comment-card p-4 bg-gray-100 rounded-lg shadow-sm">
-              <div className="flex items-center space-x-3">
+            <div key={index} className="comment-card p-4 bg-white rounded-lg shadow-lg">
+              <div className="flex items-start space-x-4">
                 <img
-                  src={`https://www.gravatar.com/avatar/${authorDisplayName.toLowerCase()}?d=robohash`}
+                  src={authorProfileImageUrl}
                   alt={authorDisplayName}
-                  className="w-10 h-10 rounded-full"
+                  className="w-12 h-12 rounded-full object-cover"
                 />
-                <div>
-                  <p className="font-semibold">{authorDisplayName}</p>
-                  <p className="text-sm text-gray-600">{new Date(publishedAt).toLocaleDateString()}</p>
+                <div className="flex-1">
+                  <div className="flex justify-between items-center">
+                    <p className="font-semibold text-gray-800">{authorDisplayName}</p>
+                    <p className="text-sm text-gray-500">{new Date(publishedAt).toLocaleDateString()}</p>
+                  </div>
+                  <p className="mt-2 text-gray-700 text-sm">{textDisplay}</p>
                 </div>
               </div>
-              <p className="mt-2 text-sm">{textDisplay}</p>
+
+              <div className="flex space-x-6 mt-3 text-gray-600">
+                <button className="flex items-center space-x-2 hover:text-blue-500 transition-all">
+                  <AiFillLike size={20} />
+                  <span className="text-sm">Like</span>
+                </button>
+                {/* Removed Reply button */}
+              </div>
             </div>
           );
         })}
