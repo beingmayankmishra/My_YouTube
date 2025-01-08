@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
-import moment from "moment"; 
-import { kFormatter } from "../utils/constants"; 
-import { YOUTUBE_VIDEO_DETAILS_API, YOUTUBE_CHANNEL_DETAILS_API } from "../constants";
-import { AiFillLike } from "react-icons/ai"; 
+import moment from "moment";
+import { YOUTUBE_VIDEO_DETAILS_API, GOOGLE_API_KEY, kFormatter } from "../constants";
+import { AiFillLike, AiFillDislike, AiOutlineDownload } from "react-icons/ai";
+import { RiShareForwardLine } from "react-icons/ri";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -21,16 +21,16 @@ const WatchPage = () => {
     const fetchVideoDetails = async () => {
       if (videoId) {
         try {
-          // Fetch video details
           const videoResponse = await fetch(YOUTUBE_VIDEO_DETAILS_API + videoId);
           const videoJson = await videoResponse.json();
           const videoInfo = videoJson?.items?.[0];
           setVideoData(videoInfo);
 
-          // Fetch channel details
           const channelId = videoInfo?.snippet?.channelId;
           if (channelId) {
-            const channelResponse = await fetch(YOUTUBE_CHANNEL_DETAILS_API + channelId);
+            const channelResponse = await fetch(
+              `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${GOOGLE_API_KEY}`
+            );
             const channelJson = await channelResponse.json();
             setChannelData(channelJson?.items?.[0]);
           }
@@ -54,12 +54,12 @@ const WatchPage = () => {
   const subscriberCount = channelData?.statistics?.subscriberCount;
 
   return (
-    <div className="flex flex-col px-5 ">
+    <div className="flex flex-col px-5">
       {/* Video Player */}
       <div className="flex justify-center py-5">
         <iframe
           className="w-[1100px] h-[600px] rounded-lg shadow-md"
-          src={`https://www.youtube.com/embed/${videoId}`}
+          src={`https://www.youtube.com/embed/${videoId}?&autoplay=1`}
           title={title}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -71,9 +71,7 @@ const WatchPage = () => {
       <div className="mt-5 max-w-[1100px] mx-auto flex flex-col space-y-4">
         <h1 className="text-2xl font-bold">{title}</h1>
 
-        {/* Channel and Like/Dislike Section */}
         <div className="flex items-center justify-between border-b border-gray-300 pb-4">
-          {/* Left: Channel Info */}
           <div className="flex items-center space-x-4">
             <img
               src={channelLogo}
@@ -83,43 +81,39 @@ const WatchPage = () => {
             <div>
               <h2 className="font-semibold">{channelTitle}</h2>
               <p className="text-sm text-gray-600">
-                {kFormatter(subscriberCount)} subscribers
+                {kFormatter(subscriberCount || 0)} subscribers
               </p>
             </div>
             <button className="px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600">
               Subscribe
             </button>
           </div>
-
-          {/* Right: Like/Dislike Section */}
-          <div className="flex items-center space-x-4 bg-gray-200 px-4 py-2 rounded-lg">
-            <button className="flex items-center space-x-2 text-gray-700 hover:text-black">
-              <AiFillLike size={20} />
-              <span className="font-semibold">{kFormatter(likeCount)}</span>
-              <span>Likes</span>
-            </button>
-            <button className="flex items-center space-x-2 text-gray-700 hover:text-black">
-              <AiFillLike size={20} className="rotate-180" />
-              <span>Dislike</span>
-            </button>
+          <div className="flex items-center justify-end space-x-4">
+            <div className="flex items-center space-x-2 mr-6">
+              <button className="flex items-center space-x-2 text-gray-700 hover:text-black">
+                <AiFillLike size={20} />
+                <span className="font-semibold">{kFormatter(likeCount || 0)}</span>
+              </button>
+              <button className="flex items-center space-x-2 text-gray-700 hover:text-black">
+                <AiFillDislike size={20} />
+              </button>
+            </div>
+            <div className="flex items-center space-x-4">
+              <button className="flex items-center space-x-2 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+                <RiShareForwardLine size={20} />
+                <span>Share</span>
+              </button>
+              <button className="flex items-center space-x-2 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+                <AiOutlineDownload size={20} />
+                <span>Save</span>
+              </button>
+            </div>
           </div>
         </div>
-
-        {/* Views and Published Date */}
         <div className="flex items-center text-gray-600 text-sm mt-4">
-          <p>{kFormatter(viewCount)} views</p>
+          <p>{kFormatter(viewCount || 0)} views</p>
           <span className="mx-2">•</span>
           <p>{moment(publishedAt).fromNow()}</p>
-        </div>
-
-        {/* Interaction Buttons */}
-        <div className="flex items-center space-x-4 mt-4">
-          <button className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
-            Share
-          </button>
-          <button className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
-            Save
-          </button>
         </div>
       </div>
     </div>
