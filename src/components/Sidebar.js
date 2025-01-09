@@ -11,9 +11,9 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const SideBar = () => {
-  const isMenuOpen = useSelector((state) => state.app.isMenuOpen); // Accessing state correctly
+  const isMenuOpen = useSelector((state) => state.app.isMenuOpen); 
 
-  // Array of buttons with icons, names, and routes
+  
   const btns = [
     { icon: <AiFillHome />, name: "Home", to: "/" },
     { icon: <MdSubscriptions />, name: "Subscriptions", to: "/subscriptions" },
@@ -24,7 +24,7 @@ const SideBar = () => {
     { icon: <AiFillLike />, name: "Liked Videos", to: "/liked-videos" },
   ];
 
-  // Individual sidebar button component
+  
   const SideBtn = ({ icon, btnName, to }) => {
     return (
       <Link

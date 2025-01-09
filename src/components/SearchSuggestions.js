@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { setCategory } from "../utils/appSlice";
+import { useNavigate } from "react-router-dom"; 
 
 const SearchSuggestions = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isTyping, setIsTyping] = useState(false); // Track if the user is actively typing
+  const [isTyping, setIsTyping] = useState(false); 
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchSuggestions = async () => {
@@ -28,7 +30,7 @@ const SearchSuggestions = () => {
 
         if (response.ok) {
           const data = await response.json();
-          const fetchedSuggestions = data[1]; // Suggestions are in the second index of the response
+          const fetchedSuggestions = data[1]; 
           setSuggestions(fetchedSuggestions);
         } else {
           console.error("Error fetching suggestions:", response.statusText);
@@ -52,6 +54,7 @@ const SearchSuggestions = () => {
   const handleSearch = () => {
     if (searchQuery.trim() !== "") {
       dispatch(setCategory(searchQuery));
+      navigate("/"); // Redirect to the Main Page
       setSuggestions([]);
       setIsTyping(false); // Stop showing suggestions until user types again
     }
@@ -61,12 +64,13 @@ const SearchSuggestions = () => {
     setSearchQuery(suggestion);
     setSuggestions([]);
     dispatch(setCategory(suggestion));
-    setIsTyping(false); // Stop showing suggestions
+    navigate("/"); 
+    setIsTyping(false); 
   };
 
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
-    setIsTyping(true); // User is typing
+    setIsTyping(true); 
   };
 
   return (
