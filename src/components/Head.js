@@ -4,8 +4,9 @@ import { SiYoutube } from "react-icons/si";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
-import SearchSuggestions from "./SearchSuggestions"; // Import the SearchSuggestions component
-
+import SearchSuggestions from "./SearchSuggestions";
+import { FaRegBell } from "react-icons/fa6";
+import { MdOutlineVideoCall } from "react-icons/md";
 const Head = () => {
   const dispatch = useDispatch();
 
@@ -26,10 +27,17 @@ const Head = () => {
       {/* Search Bar with Suggestions */}
       <SearchSuggestions />
 
-      {/* User Icon */}
-      <div className="flex items-center text-xl space-x-4">
+      <div className="flex justify-end items-center space-x-6 pr-4">
+        {/* Video upload icon */}
+        <MdOutlineVideoCall className="text-3xl cursor-pointer" />
+
+        {/* Bell icon */}
+        <FaRegBell className="text-xl cursor-pointer" />
+
+        {/* User Icon */}
         <FaUserCircle className="text-4xl cursor-pointer" />
       </div>
+      
     </div>
   );
 };

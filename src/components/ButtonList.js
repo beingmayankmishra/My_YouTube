@@ -15,13 +15,14 @@ const ButtonList = () => {
     "Sports",
     "Music",
     "News",
-    "Love",
+    "Punjabi Songs",
     "NextJs",
     "Laptops",
     "Mixes",
     "Jukebox",
-    "Recently uploaded",
     "Kapil Sharma",
+    "Comedy Movies",
+    
   ];
 
   const handleButtonClick = (btn) => {
@@ -39,6 +40,7 @@ const ButtonList = () => {
       >
         <MdExplore className="mr-2" /> Explore
       </button>
+
       {list.map((btn, i) => (
         <button
           key={i}
