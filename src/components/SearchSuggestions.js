@@ -56,12 +56,13 @@ const SearchSuggestions = () => {
       dispatch(setCategory(searchQuery));
       navigate("/");
       setSuggestions([]);
+      setSearchQuery(""); // Clear the input field
       setIsTyping(false);
     }
   };
 
   const handleSuggestionClick = (suggestion) => {
-    setSearchQuery(suggestion);
+    setSearchQuery(""); // Clear the input field
     dispatch(setCategory(suggestion));
     navigate("/");
     setSuggestions([]);
@@ -89,8 +90,8 @@ const SearchSuggestions = () => {
       <button
         className={`px-4 py-3 rounded-r-full flex items-center ${
           isDarkMode
-            ? "bg-black hover:bg-gray-800" // Dark mode styles
-            : "bg-gray-100 hover:bg-gray-200" // Light mode styles
+            ? "bg-black hover:bg-gray-800"
+            : "bg-gray-100 hover:bg-gray-200"
         }`}
         onClick={handleSearch}
       >
