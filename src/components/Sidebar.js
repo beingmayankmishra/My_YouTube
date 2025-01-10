@@ -56,11 +56,14 @@ const SideBar = () => {
 
   return (
     <div className={`w-52 mx-1 font-bold hidden md:block`}>
-      <DarkModeToggle />
-      {btns.map((btn, i) => (
-        <SideBtn key={i} icon={btn.icon} btnName={btn.name} to={btn.to} />
-      ))}
-    </div>
+  <div className="mt-3">
+    <DarkModeToggle />
+  </div>
+  {btns.map((btn, i) => (
+    <SideBtn key={i} icon={btn.icon} btnName={btn.name} to={btn.to} />
+  ))}
+</div>
+
   );
 };
 

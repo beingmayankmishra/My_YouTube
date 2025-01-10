@@ -50,7 +50,7 @@ body {
 [data-theme="dark"] .search-input {
   background-color: #000000; /* Black input background in dark mode */
   color: #ffffff; /* White text inside input in dark mode */
-  border: 1px solid #ffffff; /* Thin white border */
+  /* border: 1px solid #ffffff; Thin white border */
   padding: 0.5rem;
   border-top-left-radius: 9999px; /* Equivalent to rounded-l-full */
   border-bottom-left-radius: 9999px; /* Equivalent to rounded-l-full */
@@ -60,9 +60,9 @@ body {
 
 /* Dark Mode Styles for Button */
 [data-theme="dark"] button {
-  background-color: #000000; /* Ensure button background is black in dark mode */
+  background-color: #0f0f0f; /* Ensure button background is black in dark mode */
   color: #ffffff; /* White text in dark mode */
-  border: 1px solid #ffffff;
+
 }
 
 [data-theme="dark"] button:hover {
