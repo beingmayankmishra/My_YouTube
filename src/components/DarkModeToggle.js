@@ -19,16 +19,20 @@ const DarkModeToggle = () => {
   return (
     <button
       onClick={handleToggle}
-      className="flex items-center px-4 py-2 m-1 rounded-lg transition-colors duration-200 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600"
+      className="flex items-center px-4 py-2 m-1 -ml-2 rounded-lg transition-colors duration-200 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600"
     >
       {isDarkMode ? (
-        <BsFillSunFill className="text-yellow-500 text-xl" />
+        <BsFillSunFill className="text-yellow-500 text-xl " />
       ) : (
-        <BsFillMoonStarsFill className="text-gray-800 text-xl" />
+        <BsFillMoonStarsFill className="text-gray-800 text-xl " />
       )}
-      <span className="ml-2">{isDarkMode ? "Light Mode" : "Dark Mode"}</span>
+      <span className="whitespace-nowrap">
+        {isDarkMode ? "Light Mode" : "Dark Mode"}
+      </span>
     </button>
   );
+  
+  
 };
 
 export default DarkModeToggle;
