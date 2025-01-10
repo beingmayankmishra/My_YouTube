@@ -5,7 +5,8 @@ const appSlice = createSlice({
   initialState: {
     isMenuOpen: true,
     category: "All",
-    isDarkMode: false, // Add dark mode state
+    isDarkMode: false, 
+    voiceText: "", 
   },
   reducers: {
     toggleMenu: (state) => {
@@ -19,10 +20,13 @@ const appSlice = createSlice({
     },
     toggleDarkMode: (state) => {
       state.isDarkMode = !state.isDarkMode;
-    }, // Add dark mode toggle reducer
+    }, 
+    setVoiceText: (state, action) => {
+      state.voiceText = action.payload; 
+    },
   },
 });
 
-export const { toggleMenu, closeMenu, setCategory, toggleDarkMode } =
+export const { toggleMenu, closeMenu, setCategory, toggleDarkMode, setVoiceText } =
   appSlice.actions;
 export default appSlice.reducer;

@@ -45,18 +45,36 @@ body {
   color: #ffffff;
 }
 
-/* Search Input Box */
-[data-theme="dark"] input[type="text"],
-[data-theme="dark"] .search-input {
-  background-color: #000000; /* Black input background in dark mode */
-  color: #ffffff; /* White text inside input in dark mode */
-  /* border: 1px solid #ffffff; Thin white border */
+/* Light Mode Input Styles */
+[data-theme="light"] input[type="text"],
+[data-theme="light"] .search-input {
+  background-color: #ffffff; /* White input background in light mode */
+  color: #000000; /* Black text inside input in light mode */
+  border: 1px solid #000000; /* Black border in light mode */
   padding: 0.5rem;
   border-top-left-radius: 9999px; /* Equivalent to rounded-l-full */
   border-bottom-left-radius: 9999px; /* Equivalent to rounded-l-full */
   transition: background-color 0.3s ease, border 0.3s ease;
 }
 
+/* Ensure border remains black when focused */
+[data-theme="light"] input[type="text"]:focus,
+[data-theme="light"] .search-input:focus {
+  border: 1px solid #000000; /* Black border in light mode */
+  outline: none; /* Remove default browser outline */
+}
+
+/* Dark Mode Input Styles */
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] .search-input {
+  background-color: #000000; /* Black input background in dark mode */
+  color: #ffffff; /* White text inside input in dark mode */
+  border: 1px solid #ffffff; /* White border in dark mode */
+  padding: 0.5rem;
+  border-top-left-radius: 9999px; /* Equivalent to rounded-l-full */
+  border-bottom-left-radius: 9999px; /* Equivalent to rounded-l-full */
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
 
 /* Dark Mode Styles for Button */
 [data-theme="dark"] button {
@@ -69,31 +87,11 @@ body {
   background-color: #333333; /* Darker gray on hover */
 }
 
-
-
-
-
-/* Focus styles for search input */
-input[type="text"]:focus, .search-input:focus {
-  outline: none;
-  border: 1px solid #ffffff;
-}
-
 /* Search Suggestion Box */
 [data-theme="dark"] .search-suggestions {
   background-color: #000000; /* Black background for suggestions */
   color: #ffffff; /* White text for suggestions */
   border: 1px solid #ffffff; /* White border for suggestions */
-}
-
-/* Dark Mode for other components */
-[data-theme="dark"] .header, [data-theme="dark"] .footer {
-  background-color: #1f1f1f;
-}
-
-[data-theme="dark"] .card {
-  background-color: #333333;
-  color: #ffffff;
 }
 
 /* Links */
@@ -114,7 +112,6 @@ a {
   background-color: #3d3d3d;
 }
 
-
 /* Custom Hover Styles */
 [data-theme="dark"] .btn-hover {
   background-color: #333333; /* Default button background */
@@ -124,12 +121,7 @@ a {
   background-color: #2d2d2d; /* Slightly darker gray on hover */
 }
 
-/* Search Suggestion Box */
-[data-theme="dark"] .search-suggestions {
-  background-color: #000000; /* Black background */
-  color: #ffffff; /* White text */
-}
-
+/* Search Suggestion Items */
 [data-theme="dark"] .search-suggestion-item {
   background-color: #000000; /* Default suggestion background */
   color: #ffffff; /* White text */

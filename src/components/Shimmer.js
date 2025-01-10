@@ -1,7 +1,7 @@
 import React from "react";
 
 const Shimmer = () => {
-  const shimmerCards = Array(16).fill(0); // Create 16 placeholder cards
+  const shimmerCards = Array(16).fill(0); 
 
   return (
     <div className="grid grid-cols-4 gap-4 p-4">

@@ -6,7 +6,7 @@ import moment from "moment";
 import { YOUTUBE_VIDEO_DETAILS_API, GOOGLE_API_KEY, kFormatter } from "../constants";
 import { AiFillLike, AiFillDislike, AiOutlineDownload } from "react-icons/ai";
 import { RiShareForwardLine } from "react-icons/ri";
-import Comments from "../components/Comments"; // Import Comments Component
+import Comments from "../components/Comments"; 
 import SuggestedVideos from "../components/SuggestedVideos";
 import WatchPageShimmer from "./WatchPageShimmer";
 

@@ -27,7 +27,7 @@ const ButtonList = () => {
 
   const handleButtonClick = (btn) => {
     setActiveButton(btn);
-    dispatch(setCategory(btn)); // Dispatch selected category to Redux
+    dispatch(setCategory(btn)); 
   };
 
   return (

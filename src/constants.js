@@ -1,5 +1,5 @@
 
-export const GOOGLE_API_KEY = "AIzaSyB0bS-YTxhVFuP5qyjRiNm0_waDT_pOCD4"; 
+export const GOOGLE_API_KEY = "AIzaSyAKGFuEqXp1_IMFGwWEFx6_9wjzUhlnL3Q"; 
 
 // Define API Endpoints
 export const YOUTUBE_VIDEO_API = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&chart=mostPopular&regionCode=IN&maxResults=50&key=${GOOGLE_API_KEY}`;
