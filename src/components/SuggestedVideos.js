@@ -27,42 +27,46 @@ const SuggestedVideos = ({ currentVideoId }) => {
   }, [currentVideoId]);
 
   return (
-    <div className="w-1/3 pl-5">
+    <div className="w-full md:w-1/5 pl-5">
       <h3
-        className={`font-semibold text-lg mb-4 ${
-          isDarkMode ? "text-white" : "text-black"
-        }`}
+        className={`font-semibold text-lg mb-4 ${isDarkMode ? "text-white" : "text-black"}`}
       >
         Suggested Videos
       </h3>
-      {videos.map((video) => (
-        <Link
-          to={`/watch?v=${video.id}`}
-          key={video.id}
-          className={`flex mb-4 p-2 rounded-lg ${
-            isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-          }`}
-        >
-          <img
-            src={video.snippet.thumbnails.medium.url}
-            alt={video.snippet.title}
-            className="w-40 h-24 rounded-lg"
-          />
-          <div className="ml-4">
-            <h4 className={`font-semibold text-sm ${isDarkMode ? "text-white" : "text-black"}`}>
-              {video.snippet.title}
-            </h4>
-            <p className={`text-xs ${isDarkMode ? "text-gray-300" : "text-gray-500"}`}>
-              {video.snippet.channelTitle}
-            </p>
-            <p className={`text-xs ${isDarkMode ? "text-gray-300" : "text-gray-500"}`}>
-              {video.snippet.publishedAt.split("T")[0]}
-            </p>
-          </div>
-        </Link>
-      ))}
+      <div className="flex flex-wrap gap-4">
+        {videos.map((video) => (
+          <Link
+            to={`/watch?v=${video.id}`}
+            key={video.id}
+            className={`flex w-full sm:w-1/2 md:w-full p-2 rounded-lg ${
+              isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
+            }`}
+          >
+            <div className="flex flex-col w-full sm:w-1/2 md:w-full">
+              <img
+                src={video.snippet.thumbnails.medium.url}
+                alt={video.snippet.title}
+                className="w-full h-24 rounded-lg"
+              />
+              <div className="ml-2 mt-2">
+                <h4 className={`font-semibold text-sm ${isDarkMode ? "text-white" : "text-black"}`}>
+                  {video.snippet.title}
+                </h4>
+                <p className={`text-xs ${isDarkMode ? "text-gray-300" : "text-gray-500"}`}>
+                  {video.snippet.channelTitle}
+                </p>
+                <p className={`text-xs ${isDarkMode ? "text-gray-300" : "text-gray-500"}`}>
+                  {video.snippet.publishedAt.split("T")[0]}
+                </p>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
+  
+  
 };
 
 export default SuggestedVideos;

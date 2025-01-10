@@ -20,8 +20,8 @@ const ButtonList = () => {
     "Laptops",
     "Mixes",
     "Jukebox",
-    "Kapil Sharma",
-    "Comedy Movies",
+    "Movies",
+    
     
   ];
 
