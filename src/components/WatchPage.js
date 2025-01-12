@@ -10,7 +10,6 @@ import Comments from "../components/Comments";
 import SuggestedVideos from "../components/SuggestedVideos";
 import WatchPageShimmer from "./WatchPageShimmer";
 
-
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
@@ -20,6 +19,9 @@ const WatchPage = () => {
   const videoId = searchParams.get("v");
 
   useEffect(() => {
+   
+    window.scrollTo(0, 0);
+
     dispatch(closeMenu());
 
     const fetchVideoDetails = async () => {
@@ -50,7 +52,6 @@ const WatchPage = () => {
   if (!videoData || !channelData) {
     return <WatchPageShimmer />;
   }
-  
 
   const { snippet, statistics } = videoData;
   const { title, channelTitle, publishedAt } = snippet;
@@ -72,7 +73,7 @@ const WatchPage = () => {
             allowFullScreen
           ></iframe>
         </div>
-  
+
         {/* Video Details */}
         <div className="mt-5 w-full max-w-[1100px] px-4 flex flex-col space-y-4">
           <h1 className="text-2xl font-bold">{title}</h1>
@@ -93,7 +94,7 @@ const WatchPage = () => {
                 Subscribe
               </button>
             </div>
-  
+
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <button className="flex items-center space-x-2 text-gray-700 hover:text-black">
@@ -116,23 +117,22 @@ const WatchPage = () => {
               </div>
             </div>
           </div>
-  
+
           <div className="flex items-center text-gray-600 text-sm font-bold mt-4">
             <p>{kFormatter(viewCount || 0)} views</p>
             <span className="mx-2">•</span>
             <p>{moment(publishedAt).fromNow()}</p>
           </div>
         </div>
-  
+
         {/* Comments Section */}
         <Comments videoId={videoId} />
       </div>
-  
+
       {/* Right Section: Suggested Videos */}
       <SuggestedVideos currentVideoId={videoId} />
     </div>
   );
-  
 };
 
 export default WatchPage;
