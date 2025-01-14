@@ -13,7 +13,7 @@ import { closeMenu } from "../utils/appSlice";
 
 
 const YOUTUBE_VIDEO_DETAILS_API = "https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=";
-const GOOGLE_API_KEY = "AIzaSyD632P4MzFCaiWeF14Nf2-xGVQuvivyl_Q"; 
+const GOOGLE_API_KEY = "AIzaSyAGorzeYwRO1dTbFxiO0mOLG5p77jDS43A"; 
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -24,7 +24,7 @@ const WatchPage = () => {
 
   const videoId = searchParams.get("v");
 
-  // Always call the effect, but make sure we handle missing videoId
+ 
   useEffect(() => {
     if (!videoId) {
       setErrorMessage("Video ID is missing");

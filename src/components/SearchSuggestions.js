@@ -14,13 +14,13 @@ const SearchSuggestions = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const voiceText = useSelector((state) => state.app.voiceText); // voiceText from Redux state
+  const voiceText = useSelector((state) => state.app.voiceText); 
   const isDarkMode = useSelector((state) => state.app.isDarkMode);
 
   
   let recognition;
 
-  // Fetch suggestions on typing
+  
   useEffect(() => {
     const fetchSuggestions = async () => {
       if (!searchQuery.trim() || !isTyping) {
@@ -58,7 +58,7 @@ const SearchSuggestions = () => {
     return () => clearTimeout(delayDebounceFn);
   }, [searchQuery, isTyping]);
 
-  // Handle manual search
+ 
   const handleSearch = () => {
     if (searchQuery.trim() !== "") {
       dispatch(setCategory(searchQuery)); 
@@ -69,7 +69,7 @@ const SearchSuggestions = () => {
     }
   };
 
-  // Handle suggestion click
+ 
   const handleSuggestionClick = (suggestion) => {
     dispatch(setCategory(suggestion)); 
     navigate("/"); 
@@ -78,17 +78,17 @@ const SearchSuggestions = () => {
     setIsTyping(false); 
   };
 
-  // Handle input change
+  
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
     setIsTyping(true);
   };
 
-  // Voice recognition logic
+  
   const startVoiceSearch = () => {
     if (isListening) return; 
 
-    // Initialize recognition only once
+   
     recognition = new (window.SpeechRecognition ||
       window.webkitSpeechRecognition)();
     recognition.lang = "en-US";
@@ -124,16 +124,16 @@ const SearchSuggestions = () => {
   
   useEffect(() => {
     if (!isListening && voiceText.trim() !== "") {
-      // Automatically trigger search when voiceText is updated
-      dispatch(setCategory(voiceText)); // Dispatch action to update Redux store
-      navigate("/"); // Navigate to the search results page
-      setSuggestions([]); // Clear suggestions
+      
+      dispatch(setCategory(voiceText)); 
+      navigate("/"); 
+      setSuggestions([]); 
     }
   }, [voiceText, isListening, dispatch, navigate]);
 
   return (
     <div className="relative flex items-center w-full max-w-[38%]">
-      {/* Input Field */}
+      
       <input
         type="text"
         className={`border px-4 py-2 w-full rounded-l-full focus:outline-none ${
