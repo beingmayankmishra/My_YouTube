@@ -1,6 +1,6 @@
-# 🚀 YouTube Clone 🎥
+#  YouTube Clone 🎥
 Welcome to my YouTube Clone project! This is a video streaming platform inspired by YouTube, built with React.js, and enhanced with unique features to provide an amazing user experience.
-# 🌟 Cool Features in the Project:
+# Cool Features in the Project:
  🎙️Voice Search: Just speak, and find what you’re looking for instantly.
  
  🔍 Real-Time Search & Suggestions: Get instant results as you type, making browsing faster and smarter.
