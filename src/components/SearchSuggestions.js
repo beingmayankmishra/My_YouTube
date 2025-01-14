@@ -183,32 +183,34 @@ const SearchSuggestions = () => {
         </div>
       )}
 
-      {/* Suggestions List */}
-      {isTyping && suggestions.length > 0 && (
-        <div
-          className={`absolute top-full left-0 right-0 mt-1 z-10 rounded-lg shadow-md ${
-            isDarkMode ? "bg-black text-white" : "bg-white text-black"
-          }`}
-        >
-          <ul className="max-h-60 overflow-y-auto">
-            {loading ? (
-              <li className="px-4 py-2">Loading...</li>
-            ) : (
-              suggestions.map((suggestion, index) => (
-                <li
-                  key={index}
-                  className={`px-4 py-2 cursor-pointer ${
-                    isDarkMode ? "hover:bg-gray-800" : "hover:bg-gray-300"
-                  }`}
-                  onClick={() => handleSuggestionClick(suggestion)}
-                >
-                  {suggestion}
-                </li>
-              ))
-            )}
-          </ul>
-        </div>
+     {/* Suggestions List */}
+{isTyping && suggestions.length > 0 && (
+  <div
+    className={`absolute top-full left-0 right-0 mt-1 z-10 rounded-lg shadow-md ${
+      isDarkMode ? "bg-black text-white" : "bg-white text-black"
+    }`}
+  >
+    <ul className="max-h-60 overflow-y-auto">
+      {loading ? (
+        <li className="px-4 py-2">Loading...</li>
+      ) : (
+        suggestions.map((suggestion, index) => (
+          <li
+            key={index}
+            className={`flex items-center px-4 py-2 cursor-pointer ${
+              isDarkMode ? "hover:bg-gray-800" : "hover:bg-gray-300"
+            }`}
+            onClick={() => handleSuggestionClick(suggestion)}
+          >
+            <AiOutlineSearch className="mr-3 text-lg" />
+            {suggestion}
+          </li>
+        ))
       )}
+    </ul>
+  </div>
+)}
+
     </div>
   );
 };

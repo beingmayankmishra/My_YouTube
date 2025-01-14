@@ -1,37 +1,47 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { closeMenu } from "../utils/appSlice";
-import moment from "moment";
-import { YOUTUBE_VIDEO_DETAILS_API, GOOGLE_API_KEY, kFormatter } from "../constants";
+
 import { AiFillLike, AiFillDislike, AiOutlineDownload } from "react-icons/ai";
 import { RiShareForwardLine } from "react-icons/ri";
-import Comments from "../components/Comments"; 
+import moment from "moment";
+import WatchPageShimmer from "../components/WatchPageShimmer";
+import Comments from "../components/Comments";
 import SuggestedVideos from "../components/SuggestedVideos";
-import WatchPageShimmer from "./WatchPageShimmer";
+import { kFormatter } from "../constants";
+import { closeMenu } from "../utils/appSlice";
+
+
+const YOUTUBE_VIDEO_DETAILS_API = "https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=";
+const GOOGLE_API_KEY = "AIzaSyD632P4MzFCaiWeF14Nf2-xGVQuvivyl_Q"; 
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const [videoData, setVideoData] = useState(null);
   const [channelData, setChannelData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const videoId = searchParams.get("v");
 
+  // Always call the effect, but make sure we handle missing videoId
   useEffect(() => {
-   
-    window.scrollTo(0, 0);
+    if (!videoId) {
+      setErrorMessage("Video ID is missing");
+      return;
+    }
 
+    window.scrollTo(0, 0);
     dispatch(closeMenu());
 
     const fetchVideoDetails = async () => {
-      if (videoId) {
-        try {
-          const videoResponse = await fetch(YOUTUBE_VIDEO_DETAILS_API + videoId);
-          const videoJson = await videoResponse.json();
-          const videoInfo = videoJson?.items?.[0];
-          setVideoData(videoInfo);
+      try {
+        const videoResponse = await fetch(YOUTUBE_VIDEO_DETAILS_API + videoId + "&key=" + GOOGLE_API_KEY);
+        const videoJson = await videoResponse.json();
+        const videoInfo = videoJson?.items?.[0];
 
+        if (videoInfo) {
+          setVideoData(videoInfo);
           const channelId = videoInfo?.snippet?.channelId;
           if (channelId) {
             const channelResponse = await fetch(
@@ -40,14 +50,21 @@ const WatchPage = () => {
             const channelJson = await channelResponse.json();
             setChannelData(channelJson?.items?.[0]);
           }
-        } catch (error) {
-          console.error("Error fetching video or channel details:", error);
+        } else {
+          setErrorMessage("Video not found.");
         }
+      } catch (error) {
+        console.error("Error fetching video or channel details:", error);
+        setErrorMessage("Failed to fetch video details.");
       }
     };
 
     fetchVideoDetails();
   }, [dispatch, videoId]);
+
+  if (errorMessage) {
+    return <div>{errorMessage}</div>;
+  }
 
   if (!videoData || !channelData) {
     return <WatchPageShimmer />;
@@ -73,7 +90,7 @@ const WatchPage = () => {
             allowFullScreen
           ></iframe>
         </div>
-
+        
         {/* Video Details */}
         <div className="mt-5 w-full max-w-[1100px] px-4 flex flex-col space-y-4">
           <h1 className="text-2xl font-bold">{title}</h1>

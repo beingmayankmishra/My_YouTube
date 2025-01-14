@@ -1,12 +1,14 @@
 
-export const GOOGLE_API_KEY = "AIzaSyDzxA0G_Nesrih7XxqnzUXTOyOKSwgqv0o"; 
+ 
+export const GOOGLE_API_KEY = "AIzaSyD632P4MzFCaiWeF14Nf2-xGVQuvivyl_Q"; 
 
-// Define API Endpoints
 export const YOUTUBE_VIDEO_API = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&chart=mostPopular&regionCode=IN&maxResults=50&key=${GOOGLE_API_KEY}`;
-export const YOUTUBE_VIDEO_DETAILS_API = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&key=${GOOGLE_API_KEY}&id=`;
+
 export const YOUTUBE_SEARCH_API = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key=${GOOGLE_API_KEY}&q=`;
 
-// Utility function for formatting numbers
+export const YOUTUBE_VIDEO_DETAILS_API = (videoIds) =>
+  `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${videoIds}&key=${GOOGLE_API_KEY}`;
+
 export const kFormatter = (num) => {
   if (num >= 1_000_000) {
     return `${(num / 1_000_000).toFixed(1)}M`;
@@ -15,5 +17,6 @@ export const kFormatter = (num) => {
   }
   return num;
 };
+
 
 
