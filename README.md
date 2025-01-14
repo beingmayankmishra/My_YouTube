@@ -22,4 +22,4 @@ Welcome to my YouTube Clone project! This is a video streaming platform inspired
  
 YouTube API for fetching and displaying videos.
 
-# This project has been a fantastic learning experience! I’ve sharpened my skills in React, APIs, and state management while working on user-friendly features like real-time search suggestions, voice search, dark mode, and shimmer effects.
+This project has been a fantastic learning experience! I’ve sharpened my skills in React, APIs, and state management while working on user-friendly features like real-time search suggestions, voice search, dark mode, and shimmer effects.
