@@ -3,7 +3,7 @@
 # 🎙️ Voice Search: Just speak, and find what you’re looking for instantly.
 # 🔍 Real-Time Search & Suggestions: Get instant results as you type, making browsing faster and smarter.
 # 🌙 Dark Mode: Switch to a sleek, eye-friendly look.
- #✨ Shimmer UI Effect: Smooth and visually appealing loading effects.
+# ✨ Shimmer UI Effect: Smooth and visually appealing loading effects.
 # 💬 Real Comments with Likes: Comments feel more interactive and real with a like feature.
 # 🏷️ Filter by Tags: Easily find videos based on categories and tags.
 # 🛠️ Tech Stack I Used:
